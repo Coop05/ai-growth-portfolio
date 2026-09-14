@@ -49,8 +49,5 @@ My focus is applied AI for growth and commercial operations: clear inputs, reusa
 
 The public repository contains original case-study summaries and illustrative examples. The operational repositories remain private. See [scope and evidence](SCOPE.md) for what is demonstrated and what is not claimed.
 
-## Roles I am interested in
-
-Remote Product Growth, Growth PM, GTM, Growth Marketing, Product Marketing and AI/Commercial Innovation opportunities.
 
 **[View my background and get in touch on LinkedIn](https://www.linkedin.com/in/delibasfatih/).**
