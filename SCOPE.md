@@ -15,6 +15,12 @@ The case studies were prepared using the public website, the public demo, the ow
 
 The AI workspace review included its README, workflow structure, content-engine workflow and meeting-to-actions workflow. The portal review included its file structure, technical documentation and recent commit descriptions. This was a portfolio preparation review, not a complete code audit or production test.
 
+## September 26 product refresh
+
+The portal case study was refreshed through read-only inspection of the running public demo, the authenticated delivery interface and Replit project views. Public-demo behaviour is distinguished from internal interface observations, development notes and proposed evaluation measures. No client names, task contents, conversations or performance figures from private workspaces are included in the refresh. Replit agent test reports are not presented as independently rerun tests.
+
+The demo contains synthetic fixtures with known presentation limitations, including differing sprint/reporting dates and period-based ratios that must not be confused with cohort conversion. These are described in the case study.
+
 ## Interpretation
 
 | Evidence | What it supports | What it does not establish |
@@ -30,3 +36,4 @@ The AI workspace review included its README, workflow structure, content-engine 
 The original operational repositories remain private. No private commit history, client configuration, internal meeting material, credentials or production data has been copied into this repository.
 
 The examples are explanatory material. This repository is not a runnable distribution of Forte's production applications or its complete internal workflow library.
+
