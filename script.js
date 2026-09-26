@@ -6,7 +6,7 @@ const screens = [
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const screen = document.querySelector('#portal-screen');
 const play = document.querySelector('#play-tour');
-let current = 1, timer = null, screenRequest = 0;
+let current = 0, timer = null, screenRequest = 0;
 const preloads = screens.map(({src}) => {const image = new Image(); image.src = src; return image;});
 function animate(element, frames, options) {
   if (!motion.matches && element.animate) return element.animate(frames, options);
@@ -28,6 +28,7 @@ async function showScreen(index) {
     else ghost.remove();
   }
   current = index;
+  updateStory(index);
   screen.src = screens[index].src;
   screen.alt = screens[index].alt;
   document.querySelector('#full-screen').href = screens[index].src;
@@ -62,7 +63,7 @@ document.querySelectorAll('[data-example]').forEach(b => b.addEventListener('cli
 
 // Content stays visible without JavaScript or IntersectionObserver support.
 let revealObserver;
-const revealTargets = document.querySelectorAll('.project-heading,.screen-stage,.decisions>div,.project-grid>article,.bench-heading,.bench-tabs,.track-record>h2,.stats>div,.about,.contact>h2');
+const revealTargets = document.querySelectorAll('.project-heading,.project-grid>article,.bench-heading,.bench-tabs,.track-record>h2,.stats>div,.about,.contact>h2');
 if ('IntersectionObserver' in window && !motion.matches) {
   revealObserver = new IntersectionObserver(entries => {
     entries.forEach(({target,isIntersecting}) => {
@@ -80,6 +81,7 @@ let progressQueued = false;
 const progress = document.querySelector('.reading-progress');
 function updateProgress() {
   progressQueued = false;
+  updateCinema();
   const distance = document.documentElement.scrollHeight - innerHeight;
   progress.style.transform = `scaleX(${distance > 0 ? Math.min(1,Math.max(0,scrollY/distance)) : 0})`;
 }
@@ -88,7 +90,6 @@ function queueProgress() {
 }
 addEventListener('scroll',queueProgress,{passive:true});
 addEventListener('resize',queueProgress,{passive:true});
-queueProgress();
 motion.addEventListener('change',() => {
   if (motion.matches) {
     stopTour();
@@ -99,3 +100,54 @@ motion.addEventListener('change',() => {
   }
   queueProgress();
 });
+
+const stories = [
+ {label:'PRIORITY',title:'Start with\nthe next action.',description:'Show what needs attention before asking the client to interpret a dashboard.'},
+ {label:'MEANING',title:'Give the numbers\ncontext.',description:'Separate activity counts from cohort conversion and make missing comparisons clear.'},
+ {label:'OWNERSHIP',title:'Make delivery\ninspectable.',description:'Distinguish a step in the plan from an output that is actually complete.'}
+];
+function updateStory(index) {
+ const story = stories[index];
+ document.querySelector('#scene-number').textContent = String(index+1).padStart(2,'0');
+ document.querySelector('#scene-label').textContent = story.label;
+ const title = document.querySelector('#scene-title');
+ title.replaceChildren();
+ story.title.split('\n').forEach((line,i) => {if(i)title.append(document.createElement('br'));title.append(document.createTextNode(line));});
+ document.querySelector('#scene-description').textContent = story.description;
+ const copy = document.querySelector('.scene-story-copy');
+ copy.getAnimations().forEach(a=>a.cancel());
+ animate(copy,[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:600,easing:'cubic-bezier(.22,1,.36,1)'});
+ document.querySelector('.scroll-cinema').style.setProperty('--scene-progress',String((index+1)/3));
+}
+const cinema = document.querySelector('.scroll-cinema');
+const cinemaMode = matchMedia('(min-width:1001px) and (min-height:650px) and (prefers-reduced-motion:no-preference)');
+let scrollChapter = -1;
+function setCinemaMode() {
+ document.documentElement.classList.toggle('cinema-enabled',cinemaMode.matches);
+ scrollChapter = -1;
+ if(!cinemaMode.matches) {
+  cinema.style.removeProperty('--screen-tilt');cinema.style.removeProperty('--screen-scale');
+  document.querySelector('.hero').style.removeProperty('--hero-drift');
+ }
+ queueProgress();
+}
+function updateCinema() {
+ if(!cinemaMode.matches) return;
+ const rect = cinema.getBoundingClientRect();
+ if(rect.top < innerHeight && rect.bottom > 0) {
+  const p = Math.min(1,Math.max(0,-rect.top/(rect.height-innerHeight)));
+  const entrance = Math.min(1,Math.max(0,1-rect.top/innerHeight));
+  cinema.style.setProperty('--screen-tilt',`${(1-entrance)*7}deg`);
+  cinema.style.setProperty('--screen-scale',String(.94+entrance*.06));
+  cinema.style.setProperty('--scene-progress',String(.05+p*.95));
+  if(rect.top<=80) {
+   const chapter = Math.min(2,Math.floor(p*3));
+   if(chapter!==scrollChapter) {scrollChapter=chapter;stopTour();showScreen(chapter);}
+  }
+ }
+ const hero = document.querySelector('.hero');
+ const heroRect = hero.getBoundingClientRect();
+ if(heroRect.bottom>0)hero.style.setProperty('--hero-drift',`${Math.min(38,Math.max(0,-heroRect.top*.07))}px`);
+}
+cinemaMode.addEventListener('change',setCinemaMode);
+setCinemaMode();
