@@ -1,4 +1,4 @@
-![Fatih Delibas — From insight. Into motion.](assets/portfolio-cover.svg)
+![Fatih Delibas / From insight. Into motion.](assets/portfolio-cover.svg)
 
 I connect customer insight, commercial thinking and hands-on building to make products and systems people can use.
 
@@ -14,7 +14,7 @@ A client GTM portal bringing the next action, delivery progress and campaign sig
 
 **Three decisions behind the product:** start with the next action; give performance numbers context; distinguish plan progress from completed work.
 
-[Read the product case study →](case-studies/client-portal.md)
+[Read the product case study](case-studies/client-portal.md)
 
 ## 02 / Context in. Useful work out.
 
@@ -25,7 +25,7 @@ A shared AI workspace for research, content and GTM delivery. Reusable context, 
 | Customer conversations | Shared context + task-specific workflows | Decisions, owners and next steps |
 | Meeting notes | Writing brief + evidence checks | Review-ready content drafts |
 
-[Explore the system →](case-studies/ai-workflow-system.md) · [Inspect an action package →](examples/meeting-to-actions.md) · [Inspect a content workflow →](examples/content-workflow.md)
+[Explore the system](case-studies/ai-workflow-system.md) · [Inspect an action package](examples/meeting-to-actions.md) · [Inspect a content workflow](examples/content-workflow.md)
 
 ## 03 / Positioning. Shipped.
 
@@ -33,7 +33,7 @@ A live commercial website connecting a complex GTM offer with clear customer sit
 
 [![Forte Growth live website](assets/forte-website.png)](https://www.fortegrowth.co/)
 
-[Visit the website →](https://www.fortegrowth.co/) · [Read the case study →](case-studies/forte-website.md)
+[Visit the website](https://www.fortegrowth.co/) · [Read the case study](case-studies/forte-website.md)
 
 ## Experience behind the work
 
@@ -45,7 +45,7 @@ Those results belong to that earlier role, separate from the Forte projects abov
 
 London-based. Product growth, GTM and applied AI.
 
-**[Connect on LinkedIn →](https://www.linkedin.com/in/delibasfatih/)**
+**[Connect on LinkedIn](https://www.linkedin.com/in/delibasfatih/)**
 
 ---
 

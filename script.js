@@ -40,13 +40,13 @@ async function showScreen(index) {
 }
 function stopTour() {
   clearInterval(timer); timer = null;
-  play.textContent = 'Play tour ▷';
+  play.textContent = 'Play tour';
   play.setAttribute('aria-pressed','false');
 }
 document.querySelectorAll('[data-screen]').forEach(b => b.addEventListener('click',() => {stopTour(); showScreen(Number(b.dataset.screen));}));
 play.addEventListener('click',() => {
   if (timer) {stopTour(); return;}
-  play.textContent = 'Pause tour Ⅱ';
+  play.textContent = 'Pause tour';
   play.setAttribute('aria-pressed','true');
   timer = setInterval(() => showScreen((current + 1) % screens.length),4000);
 });

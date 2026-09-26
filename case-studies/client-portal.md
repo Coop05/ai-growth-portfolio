@@ -17,9 +17,9 @@ The public demo uses **NovaForge Labs, a fictional company**, and is labelled **
 | Stop | What to inspect | Product decision |
 | --- | --- | --- |
 | **This Step** | Current priority, client actions, next check-in and step 9 of a 16-step plan | Lead with what the user needs to do next. |
-| **Metrics → Last week** | Nine signals grouped into Reach, Engagement and Intent; current, previous and change | Connect activity to decisions while preserving different kinds of signal. |
-| **Metrics → Conversion journey** | Independent milestones, explicitly not a nested funnel | Avoid implying that all events belong to one cohort or follow one ordered funnel. |
-| **Metrics → All time** | “No previous period” and “Change unavailable” | Do not invent a comparison baseline. |
+| **Metrics / Last week** | Nine signals grouped into Reach, Engagement and Intent; current, previous and change | Connect activity to decisions while preserving different kinds of signal. |
+| **Metrics / Conversion journey** | Independent milestones, explicitly not a nested funnel | Avoid implying that all events belong to one cohort or follow one ordered funnel. |
+| **Metrics / All time** | “No previous period” and “Change unavailable” | Do not invent a comparison baseline. |
 | **Campaigns** | Search, status filters, sorting and campaign-level activity | Connect the aggregate view to the work behind it. |
 | **Deliverables** | Phase-grouped work with Complete, In Progress and Not Started states | Separate completed outputs from position in the sprint plan. |
 
