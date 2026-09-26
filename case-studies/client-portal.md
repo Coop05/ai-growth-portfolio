@@ -1,41 +1,78 @@
 # Client GTM Portal
 
-**[Open the public demo](https://portal.fortegrowth.co/demo)** · [Back to portfolio](../README.md)
+**[Explore the public demo](https://portal.fortegrowth.co/demo)** · [Back to portfolio](../README.md)
+
+A delivery workspace connecting the next client action, a 16-step plan, campaign activity and performance reporting.
 
 ## The problem
 
-A client needs to understand what is happening this week, what needs their input and how delivery is progressing. A portal can bring those questions into one place instead of requiring someone to reconstruct the answer from separate updates.
+A client needs to know what needs their attention, what has been delivered and what should change next. A team also needs to distinguish an agreed task from supporting context, and a real performance signal from missing or stale data.
 
-## The product
+My work at Forte combines founder discussions, customer hypotheses, GTM planning and AI-assisted implementation. The portal brings those activities into an interface people can inspect and use.
 
-The public demo presents a fictional client workspace with five views:
+## A three-minute product walkthrough
 
-| View | The question it helps answer |
-| --- | --- |
-| This Step | What is the current priority, and what do I need to do? |
-| Sprint Progress | Where are we in the delivery plan? |
-| Metrics | Where can I inspect performance? |
-| Campaigns | Where can I review campaign activity? |
-| Deliverables | Where can I find the work being delivered? |
+The public demo uses **NovaForge Labs, a fictional company**, and is labelled **synthetic data / read-only**. Its figures are demonstration data, not client results. Reviewed on **26 September 2026**.
 
-The landing view includes a 16-step sprint plan, progress, client actions and a next check-in. The demo is explicitly labelled **synthetic data** and **read-only**. Its displayed figures are illustrative, not evidence of client performance.
-
-## My contribution
-
-My work at Forte includes building client GTM hubs that connect insight, campaigns, sales assets and delivery. This portal is a concrete example of that work and my use of AI-assisted development to turn a commercial process into an interface.
-
-The source repository records ongoing development, including campaign-source reconciliation and manifest-driven client onboarding. These changes show the kind of operational detail behind the interface; the demo alone does not verify production reliability or every integration.
+| Stop | What to inspect | Product decision |
+| --- | --- | --- |
+| **This Step** | Current priority, client actions, next check-in and step 9 of a 16-step plan | Lead with what the user needs to do next. |
+| **Metrics → Last week** | Nine signals grouped into Reach, Engagement and Intent; current, previous and change | Connect activity to decisions while preserving different kinds of signal. |
+| **Metrics → Conversion journey** | Independent milestones, explicitly not a nested funnel | Avoid implying that all events belong to one cohort or follow one ordered funnel. |
+| **Metrics → All time** | “No previous period” and “Change unavailable” | Do not invent a comparison baseline. |
+| **Campaigns** | Search, status filters, sorting and campaign-level activity | Connect the aggregate view to the work behind it. |
+| **Deliverables** | Phase-grouped work with Complete, In Progress and Not Started states | Separate completed outputs from position in the sprint plan. |
 
 ## Product decisions worth discussing
 
-- **Start with the next action.** The initial view puts this step's priority and client actions ahead of a broad dashboard.
-- **Show progress in context.** A step belongs to a larger sprint rather than appearing as an isolated task.
-- **Separate public demonstration from live delivery.** Fictional data lets someone inspect the experience without seeing a client workspace.
+### Start with the next action
 
-## Technical context
+The landing view foregrounds the current priority and client actions. Sprint Progress and Deliverables provide the wider context. Step 9 of 16 and 8 of 16 deliverables complete describe different things: position in a plan versus completed outputs.
 
-The private source includes a TypeScript workspace, a React front end, an Express API and a PostgreSQL/Drizzle data layer. It also contains Notion and HeyReach integration code. These are implementation details, not a claim that every feature is exercised in the public demo.
+### Reporting needs meaning, not just more numbers
 
-## What the evidence supports
+The Metrics page groups nine signals:
 
-The live demo demonstrates the interface and delivery model. The private source provides implementation context. I am not claiming a measured improvement in retention, revenue or hours saved from this portal.
+- **Reach:** prospects added, connections sent, messaged leads.
+- **Engagement:** tagged leads, accepted connections, replied leads.
+- **Intent:** interested leads, calls proposed, meetings booked.
+
+The conversion journey presents independent counts rather than a narrowing funnel. An acceptance recorded this week may relate to a request sent earlier. A period-based activity ratio is not automatically a cohort conversion rate.
+
+The LinkedIn scorecard exposes current, previous and change. Campaign reporting provides detail, while meeting-source labels distinguish HeyReach, Cal.com and the combined total in the demo.
+
+### Make uncertainty visible
+
+Email is explicitly labelled “Not connected.” All-time reporting explicitly lacks a previous period. Neither state should be mistaken for zero performance.
+
+The internal delivery interface also separates official tasks from supporting delivery context, exposes source freshness and provides a reconciliation queue for unmatched records. These capabilities were observed separately; they are **not exposed in the public demo**, and no client records are reproduced here.
+
+## My contribution and collaboration
+
+My contribution includes client GTM hubs, prioritised GTM plans and AI-assisted implementation. I work from founder discussions, research and customer hypotheses, connecting those inputs to campaigns, sales assets and delivery priorities.
+
+Before Forte, I conducted 40+ user interviews per month at Sensor Tower and partnered with Product, Engineering and Marketing to turn findings and behavioural data into product improvements. That is the product practice I bring to this work.
+
+This is a team business. The case study describes my contribution and the product decisions visible in the work; it does not claim sole authorship of the application.
+
+## Technical context and release boundaries
+
+Earlier source review identified a React/TypeScript front end, Express API, PostgreSQL/Drizzle data layer and Notion/HeyReach integration code. The current Replit sandbox's reporting notes aligned with the grouped KPI and independent-milestone views observed in the public demo.
+
+A separate older Replit mockup showed a campaign message-thread change awaiting review. It is **not counted as a verified live feature**. An integration label or development note alone does not establish that every provider is connected or every workflow operates successfully.
+
+## What I would measure next
+
+These are proposed evaluation measures, not achieved results:
+
+- Can a client identify the next action and status without a separate explanation?
+- How quickly can someone find the deliverable behind an update?
+- Can users distinguish unavailable data, stale data and a genuine zero?
+- How often do context records need reconciliation, and how long do they remain unresolved?
+- Does reporting help the team select and explain the next campaign change?
+
+## Demo limitations and next improvements
+
+The synthetic fixtures need more consistency: the sprint example is dated August while reporting periods reflect September, and one campaign's period-based acceptance ratio exceeds 100%. Before interpreting a ratio as conversion, the denominator and event/cohort definition need to be explicit. The activity log inspected was empty, so it is not evidence of populated message history.
+
+These are opportunities for clearer explanation and future fixture improvements, not production client results. No uplift in revenue, retention or time saved is claimed. See [scope and evidence](../SCOPE.md).
