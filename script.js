@@ -230,3 +230,36 @@ if('IntersectionObserver' in window) {
  productObserver.observe(productViewport);
 }
 queueProgress();
+
+// Native dialog supplies focus containment, Escape and focus restoration.
+const viewer=document.querySelector('.screen-dialog');
+const viewerImage=document.querySelector('#viewer-image');
+const viewerCanvas=document.querySelector('.viewer-canvas');
+const viewerZoom=document.querySelector('#viewer-zoom');
+let viewerIndex=0;
+function renderViewer(index){
+ viewerIndex=(index+screens.length)%screens.length;
+ const item=screens[viewerIndex];
+ viewerImage.src=item.src;viewerImage.alt=item.alt;
+ document.querySelector('#viewer-count').textContent=`${String(viewerIndex+1).padStart(2,'0')} / 03`;
+ document.querySelector('#viewer-caption').textContent=item.caption;
+ viewerCanvas.classList.remove('is-zoomed');
+ viewerZoom.setAttribute('aria-pressed','false');viewerZoom.textContent='Zoom in';
+ viewerCanvas.scrollTo(0,0);
+}
+document.querySelector('#full-screen').addEventListener('click',event=>{
+ if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||!viewer.showModal)return;
+ event.preventDefault();stopTour();renderViewer(current);viewer.showModal();
+ document.body.classList.add('viewer-open');
+});
+document.querySelector('.viewer-close').addEventListener('click',()=>viewer.close());
+viewer.addEventListener('close',()=>document.body.classList.remove('viewer-open'));
+viewer.addEventListener('click',event=>{if(event.target===viewer){const r=viewer.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)viewer.close();}});
+document.querySelector('#viewer-prev').addEventListener('click',()=>renderViewer(viewerIndex-1));
+document.querySelector('#viewer-next').addEventListener('click',()=>renderViewer(viewerIndex+1));
+viewerZoom.addEventListener('click',()=>{
+ const zoomed=viewerCanvas.classList.toggle('is-zoomed');
+ viewerZoom.setAttribute('aria-pressed',String(zoomed));viewerZoom.textContent=zoomed?'Fit to screen':'Zoom in';
+ if(zoomed){requestAnimationFrame(()=>{viewerCanvas.scrollLeft=(viewerCanvas.scrollWidth-viewerCanvas.clientWidth)*.57;});}
+ else viewerCanvas.scrollTo(0,0);
+});
