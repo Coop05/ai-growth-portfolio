@@ -178,3 +178,16 @@
  @keyframes flow-light {0%{transform:translateY(9px);border-color:var(--accent);box-shadow:0 0 24px #ed526418}100%{transform:none}}
  @keyframes number-rise {from{transform:translateY(25px);opacity:0;filter:blur(3px)}to{transform:none;opacity:1;filter:blur(0)}}
 }
+
+/* A quiet direction cue, only before the visitor starts the scroll story. */
+.scene-cue {display:none;height:48px;margin-top:14px;align-items:center;flex-direction:column;gap:4px;opacity:0;transition:opacity .5s ease,transform .5s var(--ease-out);pointer-events:none}
+.cinema-enabled .scene-cue {display:flex}
+.cue-rail {position:relative;width:1px;height:28px;background:#ffffff20;overflow:hidden}
+.cue-rail i {position:absolute;left:0;top:0;width:1px;height:12px;background:var(--accent);transform:translateY(-14px)}
+.scene-cue svg {fill:none;stroke:var(--accent);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;opacity:.65}
+.cue-waiting .scene-cue {opacity:.85;transform:none}
+.cue-waiting .cue-rail i {animation:cue-flow 2.2s ease-in-out infinite}
+.cue-waiting .scene-cue svg {animation:cue-chevron 2.2s ease-in-out infinite}
+@keyframes cue-flow {0%,15%{transform:translateY(-14px);opacity:0}30%{opacity:1}70%{transform:translateY(30px);opacity:0}100%{transform:translateY(30px);opacity:0}}
+@keyframes cue-chevron {0%,35%,100%{opacity:.35;transform:translateY(0)}65%{opacity:.85;transform:translateY(3px)}}
+@media(prefers-reduced-motion:reduce){.scene-cue{display:none!important}}

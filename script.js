@@ -122,10 +122,12 @@ function updateStory(index) {
 const cinema = document.querySelector('.scroll-cinema');
 const cinemaMode = matchMedia('(min-width:1001px) and (min-height:650px) and (prefers-reduced-motion:no-preference)');
 let scrollChapter = -1;
+let cinemaScrollUnderstood = false;
 function setCinemaMode() {
  document.documentElement.classList.toggle('cinema-enabled',cinemaMode.matches);
  scrollChapter = -1;
  if(!cinemaMode.matches) {
+  cinema.classList.remove('cue-waiting');
   cinema.style.removeProperty('--screen-tilt');cinema.style.removeProperty('--screen-scale');
   document.querySelector('.hero').style.removeProperty('--hero-drift');
  }
@@ -134,6 +136,8 @@ function setCinemaMode() {
 function updateCinema() {
  if(!cinemaMode.matches) return;
  const rect = cinema.getBoundingClientRect();
+ if(rect.top < -90) cinemaScrollUnderstood = true;
+ cinema.classList.toggle('cue-waiting', !cinemaScrollUnderstood && rect.top < innerHeight*.65 && rect.bottom > innerHeight*.5);
  if(rect.top < innerHeight && rect.bottom > 0) {
   const p = Math.min(1,Math.max(0,-rect.top/(rect.height-innerHeight)));
   const entrance = Math.min(1,Math.max(0,1-rect.top/innerHeight));
