@@ -28,6 +28,7 @@ async function showScreen(index) {
     else ghost.remove();
   }
   current = index;
+  document.querySelector(".mobile-swipe-note>span:last-child").textContent = `${String(index+1).padStart(2,"0")} / 03`;
   updateStory(index);
   screen.src = screens[index].src;
   screen.alt = screens[index].alt;
@@ -82,6 +83,7 @@ const progress = document.querySelector('.reading-progress');
 function updateProgress() {
   progressQueued = false;
   updateCinema();
+  updateMobileMotion();
   const distance = document.documentElement.scrollHeight - innerHeight;
   progress.style.transform = `scaleX(${distance > 0 ? Math.min(1,Math.max(0,scrollY/distance)) : 0})`;
 }
@@ -171,7 +173,10 @@ function goToChapter(index) {
   const start = cinema.getBoundingClientRect().top+scrollY;
   const range = cinema.offsetHeight-innerHeight;
   window.scrollTo({top:start+(index/3)*range+32,behavior:'smooth'});
- } else showScreen(index);
+ } else {
+  showScreen(index);
+  if(mobileMode.matches)document.querySelector(".screen-stage").scrollIntoView({behavior:motion.matches?"instant":"smooth",block:"start"});
+ }
 }
 document.querySelectorAll('[data-chapter]').forEach(button=>button.addEventListener('click',()=>goToChapter(Number(button.dataset.chapter))));
 document.querySelector('.scene-next').addEventListener('click',()=>{
@@ -183,3 +188,45 @@ if('IntersectionObserver' in window) {
  const navObserver = new IntersectionObserver(entries=>entries.forEach(entry=>sceneNavigation.classList.toggle('navigator-inview',entry.isIntersecting)),{threshold:.2});
  navObserver.observe(sceneNavigation);
 }
+
+// Touch adds a shortcut; the labelled chapter buttons remain available.
+const mobileMode = matchMedia('(max-width:700px)');
+const productViewport = document.querySelector('.screen-viewport');
+const detailToggle = document.querySelector('#detail-toggle');
+detailToggle.addEventListener('click',() => {
+ const full = document.querySelector('.screen-stage').classList.toggle('full-product-view');
+ detailToggle.setAttribute('aria-pressed',String(!full));
+ detailToggle.textContent = full ? 'Show detail' : 'Show full view';
+});
+let touchStart = null;
+productViewport.addEventListener('touchstart',event => {
+ touchStart = event.touches.length === 1 ? {x:event.touches[0].clientX,y:event.touches[0].clientY} : null;
+},{passive:true});
+productViewport.addEventListener('touchmove',event => {if(event.touches.length!==1)touchStart=null;},{passive:true});
+productViewport.addEventListener('touchcancel',() => {touchStart=null;},{passive:true});
+productViewport.addEventListener('touchend',event => {
+ if(!touchStart || !mobileMode.matches)return;
+ const dx=event.changedTouches[0].clientX-touchStart.x,dy=event.changedTouches[0].clientY-touchStart.y;
+ touchStart=null;
+ if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.5){stopTour();showScreen((current+(dx<0?1:2))%3);}
+},{passive:true});
+function updateMobileMotion() {
+ if(!mobileMode.matches || motion.matches)return;
+ const hero=document.querySelector('.hero'), heroRect=hero.getBoundingClientRect();
+ if(heroRect.bottom>0)hero.style.setProperty('--mobile-drift',`${Math.min(14,Math.max(0,-heroRect.top*.035))}px`);
+ const product=document.querySelector('.screen-stage'),rect=product.getBoundingClientRect();
+ if(rect.top<innerHeight && rect.bottom>0){
+  const entrance=Math.min(1,Math.max(0,(innerHeight-rect.top)/(innerHeight*.62)));
+  product.style.setProperty('--mobile-tilt',`${(1-entrance)*6}deg`);
+  product.style.setProperty('--mobile-scale',String(.94+.06*entrance));
+ }
+}
+// Pause autoplay when the product leaves the viewport.
+if('IntersectionObserver' in window) {
+ const productObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  document.querySelector('.scene-product').classList.toggle('navigator-inview',entry.isIntersecting);
+  if(!entry.isIntersecting)stopTour();
+ }),{threshold:.05});
+ productObserver.observe(productViewport);
+}
+queueProgress();
