@@ -2,7 +2,7 @@
 
 I connect customer insight, commercial thinking and hands-on building to make products and systems people can use.
 
-**[Explore the live portal](https://portal.fortegrowth.co/demo)** · **[Forte website](https://www.fortegrowth.co/)** · **[Let's talk](https://www.linkedin.com/in/delibasfatih/)**
+**[Explore the visual portfolio](https://coop05.github.io/ai-growth-portfolio/)** · **[Explore the live portal](https://portal.fortegrowth.co/demo)** · **[Forte website](https://www.fortegrowth.co/)** · **[Let's talk](https://www.linkedin.com/in/delibasfatih/)**
 
 ## 01 / Delivery. Made visible.
 
