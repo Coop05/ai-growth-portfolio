@@ -108,6 +108,7 @@ const stories = [
 ];
 function updateStory(index) {
  const story = stories[index];
+ updateChapterNavigation(index);
  document.querySelector('#scene-number').textContent = String(index+1).padStart(2,'0');
  document.querySelector('#scene-label').textContent = story.label;
  const title = document.querySelector('#scene-title');
@@ -122,12 +123,12 @@ function updateStory(index) {
 const cinema = document.querySelector('.scroll-cinema');
 const cinemaMode = matchMedia('(min-width:1001px) and (min-height:650px) and (prefers-reduced-motion:no-preference)');
 let scrollChapter = -1;
-let cinemaScrollUnderstood = false;
+
 function setCinemaMode() {
  document.documentElement.classList.toggle('cinema-enabled',cinemaMode.matches);
  scrollChapter = -1;
  if(!cinemaMode.matches) {
-  cinema.classList.remove('cue-waiting');
+
   cinema.style.removeProperty('--screen-tilt');cinema.style.removeProperty('--screen-scale');
   document.querySelector('.hero').style.removeProperty('--hero-drift');
  }
@@ -136,8 +137,7 @@ function setCinemaMode() {
 function updateCinema() {
  if(!cinemaMode.matches) return;
  const rect = cinema.getBoundingClientRect();
- if(rect.top < -90) cinemaScrollUnderstood = true;
- cinema.classList.toggle('cue-waiting', !cinemaScrollUnderstood && rect.top < innerHeight*.65 && rect.bottom > innerHeight*.5);
+
  if(rect.top < innerHeight && rect.bottom > 0) {
   const p = Math.min(1,Math.max(0,-rect.top/(rect.height-innerHeight)));
   const entrance = Math.min(1,Math.max(0,1-rect.top/innerHeight));
@@ -155,3 +155,31 @@ function updateCinema() {
 }
 cinemaMode.addEventListener('change',setCinemaMode);
 setCinemaMode();
+
+function updateChapterNavigation(index) {
+ document.querySelectorAll('[data-chapter]').forEach(button=>{
+  if(Number(button.dataset.chapter)===index)button.setAttribute('aria-current','step');
+  else button.removeAttribute('aria-current');
+ });
+ const name = ['Performance','Delivery','Selected work'][index];
+ document.querySelector('#next-chapter-name').textContent=name;
+ document.querySelector('.scene-next').setAttribute('aria-label',index===2?'Continue to more selected work':`Next chapter: ${name}`);
+}
+function goToChapter(index) {
+ stopTour();
+ if(cinemaMode.matches) {
+  const start = cinema.getBoundingClientRect().top+scrollY;
+  const range = cinema.offsetHeight-innerHeight;
+  window.scrollTo({top:start+(index/3)*range+32,behavior:'smooth'});
+ } else showScreen(index);
+}
+document.querySelectorAll('[data-chapter]').forEach(button=>button.addEventListener('click',()=>goToChapter(Number(button.dataset.chapter))));
+document.querySelector('.scene-next').addEventListener('click',()=>{
+ if(current<2)goToChapter(current+1);
+ else {stopTour();document.querySelector('.project-grid').scrollIntoView({behavior:motion.matches?'instant':'smooth',block:'start'});}
+});
+const sceneNavigation = document.querySelector('.scene-navigation');
+if('IntersectionObserver' in window) {
+ const navObserver = new IntersectionObserver(entries=>entries.forEach(entry=>sceneNavigation.classList.toggle('navigator-inview',entry.isIntersecting)),{threshold:.2});
+ navObserver.observe(sceneNavigation);
+}
