@@ -37,3 +37,7 @@ The original operational repositories remain private. No private commit history,
 
 The examples are explanatory material. This repository is not a runnable distribution of Forte's production applications or its complete internal workflow library.
 
+
+## Visual portfolio refresh — September 26
+
+The visual portfolio and README now include browser-captured images of the public portal demo and live Forte website. The portal screenshot sequence is an edited three-screen tour, not a continuous recording or production performance evidence. The interactive meeting-to-actions example is manually authored from fictional material; no model runs in the page. The personal portfolio design uses original layout, typography and graphics; it includes no Audi logos or photography. Existing case-study attribution and limitations continue to apply.

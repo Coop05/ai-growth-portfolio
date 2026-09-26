@@ -1,77 +1,54 @@
-# Fatih Delibas
-### Product Growth · GTM · Applied AI
+![Fatih Delibas — From insight. Into motion.](assets/portfolio-cover.svg)
 
+I connect customer insight, commercial thinking and hands-on building to make products and systems people can use.
 
-I turn customer insight and commercial requirements into products, workflows and growth experiments. This portfolio brings together a client portal, a shared AI workspace and a live business website built through my work at Forte Growth.
+**[Explore the live portal](https://portal.fortegrowth.co/demo)** · **[Forte website](https://www.fortegrowth.co/)** · **[Let's talk](https://www.linkedin.com/in/delibasfatih/)**
 
+## 01 / Delivery. Made visible.
 
-**[Explore the live portal demo](https://portal.fortegrowth.co/demo)** · **[Visit the website](https://www.fortegrowth.co/)** · **[Connect on LinkedIn](https://www.linkedin.com/in/delibasfatih/)**
+A client GTM portal bringing the next action, delivery progress and campaign signals into one workspace. My contribution connects customer research and GTM planning with AI-assisted implementation.
 
+[![A short screenshot sequence of the Forte portal: next action, performance, delivery. Public demo with synthetic data.](assets/portal-tour.gif)](https://portal.fortegrowth.co/demo)
 
-![Three connected areas of work: a customer portal, reusable AI workflows and a commercial website](assets/portfolio-map.svg)
+*Three captured views of the public synthetic demo. [View a still](assets/portal-metrics.png) · [Open the live product](https://portal.fortegrowth.co/demo)*
 
+**Three decisions behind the product:** start with the next action; give performance numbers context; distinguish plan progress from completed work.
 
-## Start here
+[Read the product case study →](case-studies/client-portal.md)
 
+## 02 / Context in. Useful work out.
 
-| Project | What to inspect | What it demonstrates |
-| --- | --- | --- |
-| **[Client GTM Portal](case-studies/client-portal.md)** | A three-minute walkthrough of client actions, campaign reporting and delivery progress | Product decisions about priorities, metric meaning and data trust |
-| **[AI Workflow System](case-studies/ai-workflow-system.md)** | Shared skills, workflow contracts, review steps and feedback loops | Making LLM-assisted work repeatable across a team |
-| **[Forte Website](case-studies/forte-website.md)** | A live commercial website developed with AI assistance | Connecting positioning, product presentation and a clear next step |
+A shared AI workspace for research, content and GTM delivery. Reusable context, explicit outputs and feedback that stays with the team.
 
+| Source | Working system | Reviewable output |
+|---|---|---|
+| Customer conversations | Shared context + task-specific workflows | Decisions, owners and next steps |
+| Meeting notes | Writing brief + evidence checks | Review-ready content drafts |
 
-## Featured product decision
+[Explore the system →](case-studies/ai-workflow-system.md) · [Inspect an action package →](examples/meeting-to-actions.md) · [Inspect a content workflow →](examples/content-workflow.md)
 
-The portal’s [Metrics walkthrough](case-studies/client-portal.md#a-three-minute-product-walkthrough) separates Reach, Engagement and Intent, displays independent activity counts rather than an assumed funnel, and makes unavailable comparisons explicit. The refreshed case study explains these choices, the demo’s limitations and what I would measure next.
+## 03 / Positioning. Shipped.
 
-## My contribution
+A live commercial website connecting a complex GTM offer with clear customer situations, product evidence and a next step. Built through AI-assisted development as part of my work at Forte Growth.
 
+[![Forte Growth live website](assets/forte-website.png)](https://www.fortegrowth.co/)
 
-At Forte Growth, I work across growth strategy, customer insight, GTM planning and AI-assisted implementation. My work includes reusable research and campaign workflows, client GTM hubs and the website build. I use AI tools as part of the development process and make the work inspectable through documentation, examples and live products.
+[Visit the website →](https://www.fortegrowth.co/) · [Read the case study →](case-studies/forte-website.md)
 
+## Experience behind the work
 
-These projects sit within a team business. This portfolio describes my contribution; it does not attribute every company outcome or every line of code to me.
+Before Forte, at **Sensor Tower**, I helped grow StayFree Desktop from launch to **55K+ active devices**, supported its browser extension beyond **1M active users**, and managed close to **$500K in paid acquisition spend**. I conducted **40+ user interviews per month**, working with Product, Engineering and Marketing.
 
+Those results belong to that earlier role, separate from the Forte projects above.
 
-Before Forte, at Sensor Tower, I helped grow StayFree Desktop from launch to **55K+ active devices**, supported its browser extension beyond **1M active users**, and managed close to **$500K in paid acquisition spend**. Those are results from that earlier role, separate from the projects shown here.
+## Something worth building together?
 
+London-based. Product growth, GTM and applied AI.
 
-## Look inside a workflow
+**[Connect on LinkedIn →](https://www.linkedin.com/in/delibasfatih/)**
 
+---
 
-Two small examples show how I structure AI-assisted work:
+Forte projects are team work; the case studies describe my contribution. Portal screenshots show the public synthetic demo. Workflow examples use fictional inputs. [Scope & evidence](SCOPE.md).
 
-
-- **[Meeting notes → action package](examples/meeting-to-actions.md):** decisions, evidence, owners, unknowns and completion criteria.
-- **[Meeting notes → content brief → draft](examples/content-workflow.md):** source facts, a writing brief and a draft for human review.
-
-
-Both examples were created for this public portfolio using fictional inputs. They illustrate the approach; they are not client deliverables, production logs or measured model evaluations.
-
-
-```mermaid
-flowchart LR
-    A[Source material] --> B[Shared context and rules]
-    B --> C[Task-specific workflow]
-    C --> D[Structured output]
-    D --> E[Human review]
-    E --> F[Approved delivery]
-    E --> G[Feedback]
-    G --> B
-```
-
-
-## Working with AI
-
-
-My focus is applied AI for growth and commercial operations: clear inputs, reusable context, explicit output requirements and reviewable results. Claude Code, Claude, ChatGPT and n8n feature in my broader toolkit. Each case study distinguishes a live product, a documented workflow and a portfolio illustration.
-
-
-The public repository contains original case-study summaries and illustrative examples. The operational repositories remain private. See [scope and evidence](SCOPE.md) for what is demonstrated and what is not claimed.
-
-
-
-
-**[View my background and get in touch on LinkedIn](https://www.linkedin.com/in/delibasfatih/).**
-
+The repository also includes a responsive visual portfolio in `index.html`, with a manual/playable screenshot tour and an interactive workflow illustration. It runs without a build step or external dependencies.
