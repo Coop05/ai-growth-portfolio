@@ -4,7 +4,7 @@ I connect customer insight, commercial thinking and hands-on building to make pr
 
 **[Explore the visual portfolio](https://coop05.github.io/ai-growth-portfolio/)** · **[Explore the live portal](https://portal.fortegrowth.co/demo)** · **[Forte website](https://www.fortegrowth.co/)** · **[Let's talk](https://www.linkedin.com/in/delibasfatih/)**
 
-## 01 / Delivery. Made visible.
+## 01 / Client GTM portal
 
 A client GTM portal bringing the next action, delivery progress and campaign signals into one workspace. My contribution connects customer research and GTM planning with AI-assisted implementation.
 
@@ -16,7 +16,7 @@ A client GTM portal bringing the next action, delivery progress and campaign sig
 
 [Read the product case study](case-studies/client-portal.md)
 
-## 02 / Context in. Useful work out.
+## 02 / AI workflow system
 
 A shared AI workspace for research, content and GTM delivery. Reusable context, explicit outputs and feedback that stays with the team.
 
@@ -27,7 +27,7 @@ A shared AI workspace for research, content and GTM delivery. Reusable context, 
 
 [Explore the system](case-studies/ai-workflow-system.md) · [Inspect an action package](examples/meeting-to-actions.md) · [Inspect a content workflow](examples/content-workflow.md)
 
-## 03 / Positioning. Shipped.
+## 03 / Forte Growth website
 
 A live commercial website connecting a complex GTM offer with clear customer situations, product evidence and a next step. Built through AI-assisted development as part of my work at Forte Growth.
 
@@ -51,6 +51,6 @@ London-based. Product growth, GTM and applied AI.
 
 Forte projects are team work; the case studies describe my contribution. Portal screenshots show the public synthetic demo. Workflow examples use fictional inputs. [Scope & evidence](SCOPE.md).
 
-The repository also includes a responsive visual portfolio in `index.html`. Its opening composition uses real product screenshots, CSS 3D perspective and scroll-linked camera movement. A layered product tour connects three screenshots with the decisions behind them; the workflow illustration remains interactive.
+The repository also includes a responsive portfolio in `index.html`. The opening motion study is a procedural 3D composition inspired by my interests in tennis and Formula 1. Court and Apex controls change the composition; a pause control stops animation. Products have concise descriptions, direct demo links, manual screenshot tabs and a native zoomable screenshot viewer. There is no scroll-controlled product tour.
 
-Presentation lives in `style.css` and `script.js`. There is no build step or JavaScript package dependency. Manrope loads through Google Fonts with system-font fallbacks. Motion runs on scroll or pointer input rather than a continuous render loop, and off-screen scenes stop updating. Reduced-motion preferences produce a still composition. Mobile uses an independent layout, readable screenshot crops, a full-view toggle, swipe navigation and a native zoomable screenshot viewer. Ordinary product links and the first screenshot remain accessible without JavaScript.
+Presentation lives in `style.css` and `script.js`. The page uses one font family, Manrope, across headings, body text and controls, with fallback fonts only when it cannot load. There is no build step, external 3D library or JavaScript package dependency. Canvas rendering pauses off screen and when the tab is hidden. Reduced-motion preferences start with a still composition. The mobile layout includes the same motion study, readable product crops and swipe navigation. Product links and the first screenshot remain usable without JavaScript.
