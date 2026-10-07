@@ -96,14 +96,14 @@ function batchStatics(){
  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));geo.setIndex(indices);geo.computeVertexNormals();const mesh=new T.Mesh(geo,new T.MeshStandardMaterial({vertexColors:true,roughness:.92,side:T.DoubleSide}));mesh.receiveShadow=true;scene.add(mesh);
 }
 let camTarget,lookTarget,lookCurrent;
-try{renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;host.appendChild(renderer.domElement);scene=new T.Scene();scene.fog=new T.FogExp2(0x11121c,.013);camera=new T.PerspectiveCamera(39,1,.1,180);camera.position.set(39,35,48);lookCurrent=new T.Vector3(0,1,0);camTarget=camera.position.clone();lookTarget=lookCurrent.clone();
+try{try{renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});}catch{renderer=new PortfolioCanvasRenderer();}renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;host.appendChild(renderer.domElement);scene=new T.Scene();scene.fog=new T.FogExp2(0x11121c,.013);camera=new T.PerspectiveCamera(39,1,.1,180);camera.position.set(39,35,48);lookCurrent=new T.Vector3(0,1,0);camTarget=camera.position.clone();lookTarget=lookCurrent.clone();
  scene.add(new T.HemisphereLight(0xe8ebff,0x334646,1.5));const sun=new T.DirectionalLight(0xffefdb,2.5);sun.position.set(-12,30,16);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-40,right:40,top:30,bottom:-30,near:1,far:90});sun.shadow.bias=-.0007;sun.shadow.normalBias=.035;scene.add(sun);const rim=new T.DirectionalLight(0x8ba9ff,1.4);rim.position.set(10,15,-18);scene.add(rim);
  const grid=new T.GridHelper(100,50,0x355375,0x1b2e47);grid.position.y=-2.3;grid.material.transparent=true;grid.material.opacity=.3;scene.add(grid);
  courtWorld();raceWorld();galleryWorld();buildObstacles();batchStatics();
  // Pixel fragments unite the islands without covering the content.
  const fragments=new T.InstancedMesh(boxGeometry,mat(0x668695),45),o=new T.Object3D();for(let i=0;i<45;i++){o.position.set(Math.sin(i*3.23)*33,-3-(i%4),Math.cos(i*1.76)*22);o.scale.setScalar(.12+(i%3)*.1);o.updateMatrix();fragments.setMatrixAt(i,o.matrix);}scene.add(fragments);
  $('#world-fallback').hidden=true;worldReady=true;$('#world-status').textContent='WORLD READY / EXPLORE';new ResizeObserver(resize).observe(host);resize();
-}catch(e){fallback('This browser cannot display the 3D world. You can still explore every project and contact link below.');return;}
+}catch(e){console.error('Portfolio world initialization failed',e);fallback('This browser cannot display the 3D world. You can still explore every project and contact link below.');return;}
 const poses={home:{p:[42,41,62],l:[0,0,-1]},court:{p:[-5,16,24],l:[-14,0,0]},race:{p:[33,24,29],l:[14,0,1]},work:{p:[selectedProject*4-4,10,6],l:[0,2.5,-12]},about:{p:[-38,35,48],l:[-1,0,-1]}};
 const tennisModels={[tennisKey]:player.userData.model};
 const selectorRings=[];for(const color of [0xd7ec83,0xef7986]){const ring=new T.Mesh(new T.TorusGeometry(.85,.025,4,40),new T.MeshBasicMaterial({color}));ring.rotation.x=Math.PI/2;scene.add(ring);selectorRings.push(ring);}
@@ -148,7 +148,7 @@ function updateCamera(dt){if(!game){const pose=poses[scrollTarget];camTarget.fro
  if(innerWidth<761){camTarget.sub(lookTarget).multiplyScalar(scrollTarget==='home'?.86:1.08).add(lookTarget);}}
  const ease=reduced.matches&&!game?1:Math.min(1,dt*(game?5:3.2));camera.position.lerp(camTarget,ease);lookCurrent.lerp(lookTarget,ease);camera.lookAt(lookCurrent);}
 function ambient(dt){if(paused)return;const phase=t*.3;const p=phase%1;ball.position.set(-14+Math.sin(t*.8)*2,.35+Math.abs(Math.sin(p*Math.PI*2))*1.7,-5.4+10.8*p);for(let i=0;i<trail.length;i++)trail[i].position.copy(ball.position);player.position.x=T.MathUtils.lerp(player.position.x,ball.position.x,.03);opponent.position.x=T.MathUtils.lerp(opponent.position.x,ball.position.x,.03);player.userData.model.userData.arms[1].rotation.x=Math.sin(t*3)*.15;}
-function frame(now){raf=0;if(document.hidden)return;const dt=Math.min((now-last)/1000||.016,.04);last=now;if(!paused||game)t+=dt;
+function frame(now){raf=0;if(document.hidden)return;const dt=Math.min((now-last)/1000||.016,renderer.isSoftware?.12:.04);last=now;if(!paused||game)t+=dt;
  if(game?.kind==='tennis')updateTennis(dt);else if(!game)ambient(dt);
  for(const [i,key] of ['verstappen','vettel','schumacher'].entries()){if(game?.kind==='race'&&key===raceKey)continue;if(!paused||game)setCar(cars[key],(t*.026+i*.29)%1,[-.6,.7,0][i]);}
  if(game?.kind==='race')updateRace(dt);
