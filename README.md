@@ -1,4 +1,4 @@
-![Fatih Delibas / From insight. Into motion.](assets/portfolio-cover.svg)
+# Fatih Delibas / A world in play
 
 I connect customer insight, commercial thinking and hands-on building to make products and systems people can use.
 
@@ -51,6 +51,8 @@ London-based. Product growth, GTM and applied AI.
 
 Forte projects are team work; the case studies describe my contribution. Portal screenshots show the public synthetic demo. Workflow examples use fictional inputs. [Scope & evidence](SCOPE.md).
 
-The repository also includes a responsive portfolio in `index.html`. The opening motion study is a procedural 3D composition inspired by my interests in tennis and Formula 1. Court and Apex controls change the composition; a pause control stops animation. Products have concise descriptions, direct demo links, manual screenshot tabs and a native zoomable screenshot viewer. There is no scroll-controlled product tour.
+The responsive portfolio in `index.html` is a continuous, original 3D world with a tennis island, a fantasy racing circuit and a gallery of actual projects. Scrolling moves the camera through the world; dragging changes the view. Six original voxel fan characters represent Federer, Nadal, Djokovic, Verstappen, Vettel and Schumacher. These are unofficial artistic tributes with no implied endorsement.
 
-Presentation lives in `style.css` and `script.js`. The page uses one font family, Manrope, across headings, body text and controls, with fallback fonts only when it cannot load. There is no build step, external 3D library or JavaScript package dependency. Canvas rendering pauses off screen and when the tab is hidden. Reduced-motion preferences start with a still composition. The mobile layout includes the same motion study, readable product crops and swipe navigation. Product links and the first screenshot remain usable without JavaScript.
+The tennis game includes player movement, a timed return window, an opponent, ball bounces, an eight-return objective and restart controls. The racing game includes steering, braking, barriers, a two-lap objective, collision tracking and a timer. Both have keyboard and touch controls and an explicit exit. All six characters are selectable.
+
+The page uses Manrope throughout. Presentation lives in `style.css` and `script.js`; Three.js r150 is vendored in `three.min.js` under its MIT licence. Static geometry uses instanced batches, rendering stops when the tab is hidden, and reduced-motion preferences start the ambient world paused. A pause button controls ambient motion. Explicitly starting a game enables the motion needed to play. Without WebGL, project and contact content remains usable, with a clear fallback.
