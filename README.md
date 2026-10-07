@@ -51,4 +51,6 @@ London-based. Product growth, GTM and applied AI.
 
 Forte projects are team work; the case studies describe my contribution. Portal screenshots show the public synthetic demo. Workflow examples use fictional inputs. [Scope & evidence](SCOPE.md).
 
-The repository also includes a responsive visual portfolio in `index.html`, with a manual/playable screenshot tour and an interactive workflow illustration. It runs without a build step or external dependencies.
+The repository also includes a responsive visual portfolio in `index.html`. Its opening composition uses real product screenshots, CSS 3D perspective and scroll-linked camera movement. A layered product tour connects three screenshots with the decisions behind them; the workflow illustration remains interactive.
+
+Presentation lives in `style.css` and `script.js`. There is no build step or JavaScript package dependency. Manrope loads through Google Fonts with system-font fallbacks. Motion runs on scroll or pointer input rather than a continuous render loop, and off-screen scenes stop updating. Reduced-motion preferences produce a still composition. Mobile uses an independent layout, readable screenshot crops, a full-view toggle, swipe navigation and a native zoomable screenshot viewer. Ordinary product links and the first screenshot remain accessible without JavaScript.
