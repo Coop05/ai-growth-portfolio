@@ -27,6 +27,30 @@
     ctx.lineWidth=mode<.5?3.4:1.6;ctx.strokeStyle=mode<.5?'#506421aa':'#cad6de30';seam(0);ctx.lineWidth=mode<.5?2:1;ctx.strokeStyle=mode<.5?'#f2f0cb':'#a6b1b865';seam(.018);ctx.restore();
     ctx.strokeStyle='#ffffff12';ctx.lineWidth=1;ctx.beginPath();ctx.arc(centre.x,centre.y,r,0,Math.PI*2);ctx.stroke();
   }
+  function drawWheel(radius,phase){
+    const faces=[],n=100,ax=.15+my*.15,ay=-.28+mx*.2,az=-.16;
+    const point=(a,r,z)=>rotate({x:Math.cos(a)*r,y:Math.sin(a)*r-5,z:z+15},ax,ay,az);
+    for(let i=0;i<n;i++){
+      const a=i/n*Math.PI*2,b=(i+1)/n*Math.PI*2;
+      const outer=[point(a,radius,-30),point(b,radius,-30),point(b,radius,30),point(a,radius,30)];
+      const front=[point(a,radius,30),point(b,radius,30),point(b,radius*.59,30),point(a,radius*.59,30)];
+      const light=Math.round(18+25*(.5+.5*Math.cos(a+1.2)));
+      faces.push({p:outer,z:outer.reduce((s,p)=>s+p.z,0)/4,c:`rgb(${light},${light+4},${light+7})`});
+      faces.push({p:front,z:front.reduce((s,p)=>s+p.z,0)/4,c:'#252a2d'});
+    }
+    const disk=[];for(let i=0;i<n;i++)disk.push(point(i/n*Math.PI*2,radius*.58,28));
+    faces.push({p:disk,z:1000,c:'#596167'});
+    for(let i=0;i<5;i++){
+      const a=i/5*Math.PI*2+phase*1.4;
+      const spoke=[point(a-.2,radius*.16,34),point(a-.11,radius*.57,34),point(a+.055,radius*.57,34),point(a+.15,radius*.16,34)];
+      faces.push({p:spoke,z:1001,c:i%2?'#c5cdce':'#9ca8ad'});
+    }
+    faces.sort((a,b)=>a.z-b.z).forEach(f=>{ctx.beginPath();f.p.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);});ctx.closePath();ctx.fillStyle=f.c;ctx.fill();ctx.strokeStyle=f.c;ctx.lineWidth=.7;ctx.stroke();});
+    function line(r,z,color,width){ctx.beginPath();for(let i=0;i<=n;i++){const q=project(point(i/n*Math.PI*2,r,z));i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
+    line(radius*.6,33,'#bac3c6',3);line(radius*.67,31,'#60676b',.7);line(radius*.89,31,'#e56c79',1.7);line(radius*.95,31,'#667076',.7);
+    for(let i=0;i<20;i++){const q=project(point(i/20*Math.PI*2+phase*1.4,radius*.46,30));ctx.fillStyle='#1c2226';ctx.beginPath();ctx.arc(q.x,q.y,1.8*q.k,0,Math.PI*2);ctx.fill();}
+    const hub=project(point(0,0,38)),r=radius*.16*hub.k,g=ctx.createRadialGradient(hub.x-r*.3,hub.y-r*.5,1,hub.x,hub.y,r);g.addColorStop(0,'#e4e9e9');g.addColorStop(.5,'#818d92');g.addColorStop(1,'#333c42');ctx.fillStyle=g;ctx.beginPath();ctx.arc(hub.x,hub.y,r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#20262a';ctx.beginPath();ctx.arc(hub.x,hub.y,r*.35,0,Math.PI*2);ctx.fill();
+  }
   function draw(){
     if(!ctx||!w||!h)return;
     ctx.clearRect(0,0,w,h);mx+=(tx-mx)*.055;my+=(ty-my)*.055;mode+=(targetMode-mode)*.055;
@@ -47,7 +71,7 @@
     }
     faces.sort((a,b)=>a.z-b.z);
     function face(f){ctx.beginPath();f.p.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);});ctx.closePath();ctx.fillStyle=f.c;ctx.fill();ctx.strokeStyle=f.c;ctx.lineWidth=.6;ctx.stroke();}
-    faces.filter(f=>f.z<15).forEach(face);drawBall(132-mode*20,phase);faces.filter(f=>f.z>=15).forEach(face);
+    faces.filter(f=>f.z<15).forEach(face);if(mode<.5)drawBall(132-mode*20,phase);else drawWheel(132-mode*12,phase);faces.filter(f=>f.z>=15).forEach(face);
     const satellite=rotate({x:205,y:-130,z:45},.1,phase*.15,0),q=project(satellite),sr=19*q.k;
     const g=ctx.createRadialGradient(q.x-sr*.35,q.y-sr*.4,1,q.x,q.y,sr);g.addColorStop(0,'#edf1f1');g.addColorStop(.28,'#8b969e');g.addColorStop(.65,'#333e47');g.addColorStop(1,'#10171c');ctx.fillStyle=g;ctx.beginPath();ctx.arc(q.x,q.y,sr,0,Math.PI*2);ctx.fill();
     ctx.restore();
